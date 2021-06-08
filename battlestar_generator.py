@@ -98,7 +98,7 @@ def generate_puzzle(S, N, temperature, star_configs):
       # compute star frequencies
       star_freqs = remaining_sols.mean(0) * mask
       # generate distribution (weighted boltzmann thing)
-      logits = np.exp(temperature * star_freqs) * star_freqs
+      logits = np.exp(temperature * (star_freqs - star_freqs.max())) * star_freqs
       p = logits / logits.sum()
       # sample block
       block = np.random.choice(S * S, p=p.flatten())
