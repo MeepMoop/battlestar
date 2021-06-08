@@ -73,6 +73,14 @@ def generate_star_configs(S, N):
   backtrack(specs, [None] * S, [0] * S, range(len(candidates)), 0)
   return specs.boards
 
+def matrixify_star_configs(S, star_configs):
+  mat = np.zeros((len(star_configs), S, S), dtype=int)
+  for i, star_config in enumerate(star_configs):
+    for r in range(S):
+      for c in star_config[r]:
+        mat[i, r, c] = 1
+  return mat
+
 ## puzzle generator
 
 def generate_puzzle(S, N, temperature, star_configs):
@@ -124,7 +132,7 @@ if __name__ == '__main__':
 
   # unpack star configs
   print('> processing star configs...')
-  star_configs = np.array([[[1 if c in board[r] else 0 for c in range(S)] for r in range(S)] for board in star_configs], dtype=int)
+  star_configs = matrixify_star_configs(S, star_configs)
 
   # puzzle drawer
   drawer = StarBattleDrawer(
