@@ -14,7 +14,7 @@ class ProblemSpecs:
   n_stars: int
   candidates: list
   successors: list
-  boards: int
+  boards: list
 
 def compute_candidates(size, n_stars):
   def recurse(candidates, cols=[]):
