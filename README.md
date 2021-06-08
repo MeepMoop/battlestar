@@ -8,7 +8,7 @@ A Battlestar (region-less Star Battle) puzzle generator. It samples a uniform ra
 ## Arguments
 1. **S**: Board side-length
 2. **N**: Stars per row and column
-3. **temperature**: Boltzmann distribution temperature- higher temperatures produce boards with fewer, but more structured clues, and vice-versa.
+3. **temperature**: Boltzmann distribution (inverse) temperature- higher temperatures produce boards with fewer, but more structured clues, and vice-versa.
 4. **n_puzzles**: Number of puzzles to generate
 
 ## Usage
