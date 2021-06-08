@@ -113,17 +113,17 @@ if __name__ == '__main__':
 
   # star config database
   if os.path.exists(f'star_configs_{S}_{N}.p'):
-    print('loading star configs...')
+    print('> loading star configs...')
     with open(f'star_configs_{S}_{N}.p', 'rb') as file:
       star_configs = pickle.load(file)
   else:
-    print('generating star configs...')
+    print('> generating star configs...')
     star_configs = generate_star_configs(S, N)
     with open(f'star_configs_{S}_{N}.p', 'wb') as file:
       pickle.dump(star_configs, file)
 
   # unpack star configs
-  print('processing star configs...')
+  print('> processing star configs...')
   star_configs = np.array([[[1 if c in board[r] else 0 for c in range(S)] for r in range(S)] for board in star_configs], dtype=int)
 
   # puzzle drawer
@@ -135,13 +135,16 @@ if __name__ == '__main__':
   )
 
   # generate
-  print('generating...')
+  print('> generating...')
   for i in range(1, n_puzzles + 1):
     board, solution = generate_puzzle(S, N, temperature, star_configs)
     # output
-    print('\n'.join(''.join('░░' if board[r, c] == 1 else '▓▓' for c in range(S)) for r in range(S)))
+    print('board:')
+    print('\n'.join(''.join('▓▓' if board[r, c] == 1 else '░░' for c in range(S)) for r in range(S)))
+    print('solution:')
     print('\n'.join(' '.join('*' if solution[r, c] == 1 else '.' for c in range(S)) for r in range(S)))
     drawer.draw(
       out_file=f'battlestar_{S}_{N}_{temperature}_{i}.png',
       regions_str='\n'.join([''.join(['.' if x == 1 else 'a' for x in board[r]]) for r in range(S)])
     )
+    print(f'> saved battlestar_{S}_{N}_{temperature}_{i}.png')
