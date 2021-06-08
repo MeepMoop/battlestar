@@ -13,7 +13,7 @@ A Battlestar (region-less Star Battle) puzzle generator. It samples a uniform ra
 
 ## Usage
 ```bash
-# Generate 2 8x8 1★ boards with temperature 20
+# Generate 2 8x8 1★ boards with (inverse) temperature 20
 python3 battlestar_generator.py 8 1 20 2
 ```
 ```
